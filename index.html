@@ -1,35 +1,140 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Daily Counter</title>
-<style>
-  body {
-    margin: 0;
-    background: black;
-    color: white;
-    font-family: Arial, Helvetica, sans-serif;
-    text-transform: uppercase;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    min-height: 100vh;
-    padding: 2rem;
-    box-sizing: border-box;
-  }
-  .container { max-width: 900px; line-height: 1.3; }
-  .topline { font-size: 2rem; font-weight: bold; margin-bottom: 1rem; }
-  .count { font-size: 6rem; font-weight: 900; margin: 0.5rem 0; }
-  .middle { font-size: 1.5rem; margin: 1.5rem 0; }
-  .link { font-size: 1rem; margin-top: 2rem; }
-  .link a { color: white; text-decoration: underline; }
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Been Here, Still Here — Counter</title>
+  <style>
+    :root{
+      --bg:#000;
+      --fg:#fff;
+    }
+    html,body{
+      height:100%;
+      margin:0;
+      background:var(--bg);
+      color:var(--fg);
+      font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+      text-transform:uppercase;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    .wrap{
+      min-height:100%;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      padding:2rem;
+      box-sizing:border-box;
+      text-align:center;
+    }
+
+    /* TOP LINE */
+    .topline{
+      font-weight:700;
+      font-size: clamp(26px, 5vw, 44px);
+      letter-spacing:0.06em;
+      margin-bottom:1rem;
+    }
+
+    .count {
+      text-align:center;
+      margin:0.2rem 0 1rem;
+    }
+
+    .count .days {
+      font-weight:900;
+      font-size: clamp(56px, 10vw, 120px);
+      line-height:1;
+    }
+
+    .count .time {
+      font-weight:900;
+      font-size: clamp(36px, 6vw, 72px);
+      line-height:1;
+      margin-top:0.2rem;
+    }
+
+    @media (max-width:560px){
+      .count .days, .count .time {
+        white-space:normal;
+      }
+    }
+
+    .statement{
+      max-width:900px;
+      margin:1rem auto 1.4rem;
+      font-size: clamp(26px, 5vw, 44px);
+      line-height:1.4;
+      padding:0 1.5rem;
+    }
+
+    .link{
+      font-size:clamp(12px,1.6vw,14px);
+      margin-top:0.6rem;
+    }
+    .link a{
+      color:var(--fg);
+      text-decoration:underline;
+    }
+  </style>
 </head>
 <body>
-<div class="container">
-  <div class="topline">ONE YEAR AND</div>
-  <div id="count" class="count">0 DAYS 00:00:00</div>
-  <div class="middle">
-    SINCE MY GRANDMA DIED AND I'M STILL WAITING FOR MY LEASE AND ADVOCATING FOR MY RENT-STABILIZED TENANT RIGHTS INSTEAD OF BEING ABLE T
+  <div class="wrap" role="main" aria-label="Live elapsed time since May 6, 2024">
+    <div class="topline">ONE YEAR AND</div>
+
+    <div id="count" class="count" aria-live="polite">
+      <div class="days">0 DAYS</div>
+      <div class="time">00h 00m 00s</div>
+    </div>
+
+    <div class="statement" id="statement">
+      SINCE MY GRANDMA DIED AND I'M STILL WAITING FOR MY LEASE AND ADVOCATING FOR MY RENT-STABILIZED TENANT RIGHTS INSTEAD OF BEING ABLE TO GRIEVE IN PEACE.
+    </div>
+
+    <div class="link">
+      <a href="https://change.org/protectrentersrights" target="_blank" rel="noopener noreferrer">
+        CHANGE.ORG/PROTECTRENTERSRIGHTS
+      </a>
+    </div>
+  </div>
+
+  <script>
+    // Counter starts from May 7, 2025 (ONE YEAR mark + first day)
+    const startDate = new Date(2025, 4, 7, 0, 0, 0); 
+    const dayMs  = 24 * 60 * 60 * 1000;
+    const hourMs = 60 * 60 * 1000;
+    const minMs  = 60 * 1000;
+    const secMs  = 1000;
+
+    const countEl = document.getElementById('count');
+
+    function pad(n){ return String(n).padStart(2,'0'); }
+
+    function update() {
+      const now = new Date();
+      const diffMs = now - startDate;
+
+      let leftoverDays = 0;
+      let remainderMs = 0;
+
+      if(diffMs >= 0){
+        leftoverDays = Math.floor(diffMs / dayMs); // only full days
+        remainderMs = diffMs % dayMs;
+      }
+
+      const hours = Math.floor(remainderMs / hourMs);
+      const minutes = Math.floor((remainderMs % hourMs) / minMs);
+      const seconds = Math.floor((remainderMs % minMs) / secMs);
+
+      countEl.querySelector('.days').textContent = `${leftoverDays} DAYS`;
+      countEl.querySelector('.time').textContent = `${pad(hours)}h ${pad(minutes)}m ${pad(seconds)}s`;
+    }
+
+    update(); // initial render
+    setInterval(update, 1000); // live updates
+  </script>
+</body>
+</html>

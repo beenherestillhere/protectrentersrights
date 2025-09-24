@@ -104,6 +104,27 @@
       color:var(--fg);
       text-decoration:underline;
     }
+/* LINKS SECTION - responsive, one line on mobile */
+.links {
+  display: flex;
+  justify-content: center;
+  gap: 20px;                    /* space between links */
+  flex-wrap: nowrap;             /* prevent wrapping */
+  overflow-x: auto;              /* allow horizontal scroll if needed */
+  -webkit-overflow-scrolling: touch; /* smooth scroll on iOS */
+  margin-top: 0.6rem;
+}
+
+.links a {
+  color: var(--fg);
+  text-decoration: none;
+  white-space: nowrap;           /* keep each link text together */
+  font-size: clamp(10px, 2vw, 14px); /* shrink on small screens, grow on larger */
+}
+
+.links a:hover {
+  text-decoration: underline;
+}
   </style>
 </head>
 <body>

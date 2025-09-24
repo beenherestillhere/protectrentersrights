@@ -104,27 +104,6 @@
       color:var(--fg);
       text-decoration:underline;
     }
-/* LINKS SECTION - responsive, one line on mobile */
-.links {
-  display: flex;
-  justify-content: center;
-  gap: 20px;                    /* space between links */
-  flex-wrap: nowrap;             /* prevent wrapping */
-  overflow-x: auto;              /* allow horizontal scroll if needed */
-  -webkit-overflow-scrolling: touch; /* smooth scroll on iOS */
-  margin-top: 0.6rem;
-}
-
-.links a {
-  color: var(--fg);
-  text-decoration: none;
-  white-space: nowrap;           /* keep each link text together */
-  font-size: clamp(10px, 2vw, 14px); /* shrink on small screens, grow on larger */
-}
-
-.links a:hover {
-  text-decoration: underline;
-}
   </style>
 </head>
 <body>
@@ -140,25 +119,49 @@
       SINCE MY GRANDMA DIED AND I'M STILL WAITING FOR MY LEASE AND ADVOCATING FOR MY RENT-STABILIZED TENANT RIGHTS INSTEAD OF BEING ABLE TO GRIEVE IN PEACE.
     </div>
 
-<div class="link">
-  <a href="https://www.columbiaspectator.com/city-news/2024/10/30/her-family-lived-in-their-morningside-heights-home-for-three-generations-after-the-death-of-her-grandparents-shes-fighting-to-keep-it-that-way/">
-    CONTEXT</a>
-  &nbsp;
+<!-- LINKS SECTION -->
+<div class="links">
   <a href="https://change.org/protectrentersrights" target="_blank" rel="noopener noreferrer">
-    SIGN THE PETITION</a>
-  &nbsp;
+    CHANGE.ORG/PROTECTRENTERSRIGHTS
+  </a>
   <a href="https://forms.gle/556rZD5ekLtJ45ny9" target="_blank" rel="noopener noreferrer">
-    BUY A WATERCOLOR</a>
-  &nbsp;
+    BUY A WATERCOLOR
+  </a>
   <a href="mailto:kristinamlopez@gmail.com">
-    CONTACT</a>
+    CONTACT
+  </a>
 </div>
-<!-- Subtle SEO text -->
-<p style="font-size: 10px; color: #f9f9f9; margin-top: 20px; text-align: center;">
-  BEEN HERE STILL HERE is a housing justice and art project connected to 111 Street. 
-  <br>This site shares the counter, petition, and fundraiser art sale led by Kristina Maria Lopez, 
+
+<!-- Subtle SEO text beneath links -->
+<p style="font-size: 10px; color: #f9f9f9; margin-top: 20px; text-align: center; line-height: 1.4;">
+  BEEN HERE STILL HERE is a housing justice and art project connected to 111 Street.<br>
+  This site shares the story, petition, and fundraiser led by Kristina Lopez, 
   advocating for rent-stabilized tenant rights in New York City.
 </p>
+
+<!-- CSS -->
+<style>
+.links {
+  display: flex;
+  justify-content: center;
+  gap: 20px;                    
+  flex-wrap: nowrap;             
+  overflow-x: auto;              
+  -webkit-overflow-scrolling: touch; 
+  margin-top: 0.6rem;
+}
+
+.links a {
+  color: var(--fg);
+  text-decoration: none;
+  white-space: nowrap;           
+  font-size: clamp(10px, 2vw, 14px); 
+}
+
+.links a:hover {
+  text-decoration: underline;
+}
+</style>
   <script>
     // Counter starts from May 7, 2025 (ONE YEAR mark + first day)
     const startDate = new Date(2025, 4, 7, 0, 0, 0); 

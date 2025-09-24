@@ -104,6 +104,26 @@
       color:var(--fg);
       text-decoration:underline;
     }
+ /* LINKS SECTION */
+.links {
+  display: flex;
+  justify-content: center;
+  gap: 20px;        /* space between links */
+  flex-wrap: nowrap; /* prevent wrapping */
+  overflow-x: auto;  /* allow horizontal scroll if too wide */
+  white-space: nowrap; /* keep text together */
+  margin-top: 0.6rem;
+  font-size: clamp(12px, 1.6vw, 14px);
+}
+
+.links a {
+  color: var(--fg);
+  text-decoration: none;
+}
+
+.links a:hover {
+  text-decoration: underline;
+}
   </style>
 </head>
 <body>
